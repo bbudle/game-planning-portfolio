@@ -1,9 +1,26 @@
+/* Detail page uses the same subdued midnight atmosphere as the main page. */
 .detail-body {
-  background: #0c1222;
-  background-image: radial-gradient(circle at 1px 1px,rgba(115,155,202,.10) 1px,transparent 1.2px),linear-gradient(110deg,rgba(7,16,29,.7),rgba(12,18,34,.9));
-  background-size: 32px 32px, cover;
+  position: relative;
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at 18% 12%, rgba(71, 92, 161, .12) 0%, transparent 39%),
+    radial-gradient(ellipse at 86% 32%, rgba(82, 58, 118, .10) 0%, transparent 40%),
+    linear-gradient(160deg, #10192d 0%, #0c1427 45%, #0a1222 100%);
 }
-.detail {max-width: 1040px; width: calc(100% - 48px); margin: 0 auto; padding: 34px 0 64px;}
+.detail-body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 11% 12%, rgba(220,229,254,.55) 0 .8px, transparent 1.6px),
+    radial-gradient(circle at 75% 15%, rgba(210,225,255,.40) 0 .9px, transparent 1.8px),
+    radial-gradient(circle at 40% 65%, rgba(230,231,255,.45) 0 .7px, transparent 1.6px),
+    radial-gradient(circle at 92% 70%, rgba(204,225,251,.42) 0 .8px, transparent 1.8px);
+  opacity: .42;
+}
+
+.detail {position:relative;max-width: 1040px; width: calc(100% - 48px); margin: 0 auto; padding: 34px 0 64px;}
 .detail__back,.detail__bottom a {font-size: 13px; font-weight: 600; color: #aeb6cb; transition:color .15s;}
 .detail__back:hover,.detail__bottom a:hover {color: #eaf6ff;}
 .detail__header {margin: 42px 0 24px;padding-bottom: 22px;border-bottom: 1px solid rgba(166,197,230,.25);}

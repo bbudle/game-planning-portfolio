@@ -28,7 +28,7 @@
     return;
   }
   document.title = `${project.title} | PORTFOLIO`;
-  $('#detailCategory').textContent = project.category === 'work' ? '실무 프로젝트' : '개인 프로젝트';
+  $('#detailCategory').textContent = project.category === 'work' ? '실무 프로젝트' : project.category === 'prototype' ? '개인 프로젝트 · 기획 검증 프로토타입' : '개인 프로젝트';
   title.textContent = project.title;
   $('#detailDescription').textContent = [project.genre, project.description].filter(Boolean).join(' · ');
   const video = safeLocal(project.video?.href, 'video');
@@ -38,6 +38,7 @@
     el.controls = true;
     el.preload = 'metadata';
     el.playsInline = true;
+    if (project.image && /^assets\/[a-zA-Z0-9_.%()\/-]+$/.test(project.image)) el.poster = project.image;
     el.setAttribute('aria-label', `${project.title} 대표 영상`);
     const source = document.createElement('source');
     source.src = video;

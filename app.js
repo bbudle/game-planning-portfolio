@@ -20,13 +20,15 @@
     const href = safeUrl(url);
     const text = kind === 'pdf' ? `PDF 보기 · ${label}` : '영상 보기';
     const content = `${icon(kind)}<span class="resource-row__label">${escapeHtml(text)}</span>`;
-    if (kind === 'video' && href && /^(?:\.\/)?media\//.test(href)) {
+    // PDF는 PDF 보기 버튼을 눌렀을 때만 원본 파일을 직접 연다.
+    if (kind === 'pdf' && href && (/(?:\.pdf)(?:[?#].*)?$/i.test(href) || /^https:\/\//i.test(href))) {
+      return `<a class="resource-row" href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHtml(text)} · 새 탭에서 열기">${content}<span class="resource-row__arrow" aria-hidden="true">↗</span></a>`;
+    }
+    // 영상 보기 버튼은 우리 사이트의 재생 페이지로만 이동한다. (YouTube/외부 임베드 없음)
+    if (kind === 'video' && href && /^(?:\.\/)?media\/[a-zA-Z0-9가-힣_%().\/-]+\.(?:mp4|webm|ogv)$/i.test(href)) {
       return `<a class="resource-row" href="project.html?id=${encodeURIComponent(projectId)}" aria-label="${escapeHtml(text)} · 프로젝트 페이지에서 재생">${content}<span class="resource-row__arrow" aria-hidden="true">→</span></a>`;
     }
-    if (kind === 'pdf' && href && /^(?:\.\/)?docs\//.test(href)) {
-      return `<a class="resource-row" href="project.html?id=${encodeURIComponent(projectId)}" aria-label="${escapeHtml(text)} · 프로젝트 페이지에서 열기">${content}<span class="resource-row__arrow" aria-hidden="true">→</span></a>`;
-    }
-    return `<div class="resource-row resource-row--pending" title="자료 준비 중">${content}<span class="resource-row__pending">준비 중</span></div>`;
+    return `<div class="resource-row resource-row--pending" title="자료 준비 중" aria-label="${escapeHtml(text)} · 준비 중">${content}<span class="resource-row__pending">준비 중</span></div>`;
   }
 
   function progress(stage) {
@@ -42,15 +44,15 @@
     const rows = (Array.isArray(project.pdfs) ? project.pdfs : []).map((pdf) => resourceRow('pdf', pdf.label, pdf.href, project.id)).join('');
     const video = project.video ? resourceRow('video', project.video.label, project.video.href, project.id) : '';
     const art = hasImage ? `style="--cover:url('${escapeHtml(project.image)}')"` : '';
-    return `<article class="project-card ${hasImage?'project-card--illustrated':'project-card--empty'}" id="${escapeHtml(project.id)}">
-      <a class="project-card__cover" href="project.html?id=${encodeURIComponent(project.id)}" aria-label="${escapeHtml(project.title)} 상세 페이지 보기" ${art}>
+    return `<article class="project-card ${hasImage?'project-card--illustrated':'project-card--empty'} " id="${escapeHtml(project.id)}">
+      <div class="project-card__cover" ${art}>
         <div class="project-card__info">
           <h3>${escapeHtml(project.title)}</h3>
           <p class="project-card__genre">${escapeHtml(project.genre)}</p>
           <p class="project-card__description">${escapeHtml(project.description)}</p>
         </div>
-        ${isPersonal ? progress(project.stage) : ''}
-      </a>
+        ${isPersonal && project.showProgress !== false ? progress(project.stage) : ''}
+      </div>
       <div class="project-card__resources" aria-label="${escapeHtml(project.title)} 자료">${rows}${video}</div>
     </article>`;
   }

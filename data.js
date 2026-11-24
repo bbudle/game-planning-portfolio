@@ -71,6 +71,24 @@ window.PORTFOLIO_DATA = {
       stage: 0, // 잠정 표시
       pdfs: [{label: '시스템·콘텐츠 기획', href: null}],
       video: {label: '플레이 영상', href: null}
+    },
+    {
+      id: 'combat-prototype', category: 'personal', order: 4,
+      showProgress: false, // 완료된 단기 프로토타입: 진행 중 단계 막대 미표시
+      title: '귀무자 전투 프로토타입', genre: '2D 액션 전투 · Unreal Engine',
+      description: '같은 공격에 여러 대응을 준비했을 때, 각 행동을 선택할 이유가 생기는지 시험했습니다.',
+      image: 'assets/combat-prototype-cover.webp',
+      pdfs: [{label: '전투 설계·구현·검증 사례', href: 'docs/combat-prototype.pdf'}],
+      video: {label: '대표 영상', href: 'media/combat-prototype.mp4'}
+    },
+    {
+      id: 'system-prototype', category: 'personal', order: 5,
+      showProgress: false, // 완료된 단기 프로토타입: 진행 중 단계 막대 미표시
+      title: '성장·영토 확장 프로토타입', genre: '방치형·전략 시스템 · Unreal Engine',
+      description: '사냥의 성과를 점령·배치·에너지 공급과 연결해 다음 성장 목표를 만드는 구조를 시험했습니다.',
+      image: 'assets/system-prototype-cover.webp',
+      pdfs: [{label: '성장·시스템 설계·검증 사례', href: 'docs/system-prototype.pdf'}],
+      video: {label: '대표 영상', href: 'media/system-prototype.mp4'}
     }
   ]
 };

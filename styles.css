@@ -207,10 +207,9 @@ img { display: block; max-width: 100%; }
 .main {
   min-width: 0;
   background:
-    radial-gradient(circle at 20% 18%, rgba(93, 106, 179, 0.06) 0%, transparent 32%),
-    radial-gradient(circle at 78% 22%, rgba(155, 114, 185, 0.05) 0%, transparent 26%),
-    linear-gradient(180deg, rgba(9, 14, 29, .48), rgba(9, 14, 29, .72)),
-    #0c1222 url('assets/night-sky.svg') center top / cover repeat-y;
+    radial-gradient(ellipse at 18% 12%, rgba(71, 92, 161, .12) 0%, transparent 39%),
+    radial-gradient(ellipse at 86% 32%, rgba(82, 58, 118, .10) 0%, transparent 40%),
+    linear-gradient(160deg, #10192d 0%, #0c1427 45%, #0a1222 100%);
 }
 .main__interior {
   max-width: var(--content-max);
@@ -729,6 +728,122 @@ body { font-family: var(--font-ui); font-weight: 400; line-height: 1.62; }
   .section-heading__character--personal { height: 77px; right: 5px; bottom: 10px; }
 }
 
-/* v7 detail-page navigation: presentation unchanged, cover is an accessible link. */
-.project-card__cover {cursor:pointer;color:inherit;text-decoration:none;}
-.project-card__cover:focus-visible {outline:3px solid var(--accent-2);outline-offset:-3px;}
+/* v8 — refined midnight atmosphere; no background picture or tiled star image. */
+.main { position: relative; isolation: isolate; }
+.main__interior { position: relative; z-index: 1; }
+.main::before, .main::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+/* Sparse star glints; soft blue-black atmosphere is more important than the stars. */
+.main::before {
+  background-image:
+    radial-gradient(circle at 9% 7%, rgba(214,228,255,.57) 0 .7px, transparent 1.5px),
+    radial-gradient(circle at 24% 19%, rgba(203,222,255,.38) 0 .8px, transparent 1.8px),
+    radial-gradient(circle at 34% 4%, rgba(192,210,247,.43) 0 .6px, transparent 1.4px),
+    radial-gradient(circle at 59% 13%, rgba(220,221,255,.35) 0 .7px, transparent 1.6px),
+    radial-gradient(circle at 80% 7%, rgba(200,222,255,.52) 0 .8px, transparent 1.6px),
+    radial-gradient(circle at 96% 24%, rgba(222,224,255,.35) 0 .7px, transparent 1.5px),
+    radial-gradient(circle at 17% 43%, rgba(189,212,248,.40) 0 .7px, transparent 1.4px),
+    radial-gradient(circle at 49% 35%, rgba(207,224,255,.40) 0 .8px, transparent 1.7px),
+    radial-gradient(circle at 76% 48%, rgba(210,216,250,.38) 0 .7px, transparent 1.5px),
+    radial-gradient(circle at 92% 65%, rgba(215,226,255,.39) 0 .8px, transparent 1.6px),
+    radial-gradient(circle at 30% 71%, rgba(200,215,255,.42) 0 .65px, transparent 1.5px),
+    radial-gradient(circle at 63% 83%, rgba(201,223,252,.44) 0 .8px, transparent 1.5px),
+    radial-gradient(circle at 11% 93%, rgba(222,230,255,.36) 0 .65px, transparent 1.5px);
+  opacity: .48;
+}
+.main::after {
+  background-image:
+    radial-gradient(circle at 15% 27%, rgba(234,240,255,.65) 0 .85px, transparent 2px),
+    radial-gradient(circle at 66% 5%, rgba(225,232,255,.70) 0 .9px, transparent 2px),
+    radial-gradient(circle at 89% 38%, rgba(226,229,255,.65) 0 .9px, transparent 2px),
+    radial-gradient(circle at 37% 59%, rgba(230,232,255,.65) 0 .8px, transparent 1.9px),
+    radial-gradient(circle at 73% 79%, rgba(224,236,255,.58) 0 .85px, transparent 1.8px);
+  animation: midnight-twinkle 11s ease-in-out infinite alternate;
+}
+@keyframes midnight-twinkle { 0%, 11% {opacity:.11;} 49% {opacity:.58;} 78% {opacity:.31;} 100% {opacity:.73;} }
+@media (prefers-reduced-motion: reduce) { .main::after {animation: none; opacity: .38;} }
+
+/* The columns already have distinct headings; a whisper-thin separator reinforces the 50/50 split. */
+.columns { position: relative; }
+.columns::before {
+  content: "";
+  position: absolute;
+  top: 140px;
+  bottom: 12px;
+  left: 50%;
+  width: 1px;
+  pointer-events: none;
+  background: linear-gradient(to bottom, transparent, rgba(190,208,239,.36) 12%, rgba(190,208,239,.24) 72%, transparent);
+}
+/* The card is informational, not a hyperlink; only explicitly labeled resource links navigate. */
+.project-card {
+  transition: border-color .25s ease, box-shadow .25s ease;
+}
+.project-card:hover {
+  border-color: rgba(195,215,249,.66);
+  box-shadow: 0 0 0 1px rgba(142,175,231,.075), 0 20px 44px rgba(2,6,18,.37);
+}
+.project-card__cover {
+  cursor: default;
+  color: inherit;
+  text-decoration: none;
+  transition: box-shadow .3s ease;
+}
+.project-card:hover .project-card__cover { box-shadow: inset 0 0 0 999px rgba(184,206,255,.026); }
+.resource-row--pending { cursor: default; }
+@media(max-width:1120px) {
+  .columns::before { display: none; }
+  .personal-column { position: relative; }
+  .personal-column::before {
+    content: "";
+    position: absolute;
+    left: 6%; right: 6%; top: -22px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(190,208,239,.34), transparent);
+  }
+}
+
+
+
+/* v11 — separate research link at the absolute foot of the portfolio sidebar.
+   It is external reading material, never a project card or portfolio category. */
+.sidebar__content { flex: 0 1 auto; overflow-y: auto; scrollbar-width: thin; scrollbar-color: rgba(163,179,220,.3) transparent; }
+.sidebar__bottom {
+  width: 100%; flex: 0 0 auto; margin-top: auto;
+  padding-top: 18px; border-top: 1px solid rgba(176,177,211,.2);
+}
+.sidebar__bottom-eyebrow {
+  display: block; margin: 0 0 11px 2px; font-size: 10px; font-weight: 700;
+  color: #a3aac5; letter-spacing: .13em; white-space: nowrap;
+}
+.sidebar__bottom .nav-link {
+  background: rgba(17,23,43,.54); border-color: rgba(170,183,218,.29);
+}
+.sidebar__bottom .nav-link:hover { border-color: rgba(165,215,239,.66); }
+.sidebar__bottom .nav-link svg { color: #acd4e9; }
+.layout.is-collapsed .sidebar__bottom-eyebrow { display: none; }
+.layout.is-collapsed .sidebar__bottom .nav-link {
+  width: 52px; height: 52px; min-height: 52px; padding: 0;
+  margin: 0 auto; justify-content: center;
+}
+.layout.is-collapsed .sidebar__bottom .nav-link__text,
+.layout.is-collapsed .sidebar__bottom .nav-link__arrow { display: none; }
+@media (max-width: 760px) {
+  .sidebar__inner, .layout.is-collapsed .sidebar__inner { height: auto; }
+  .sidebar__content, .layout.is-collapsed .sidebar__content { flex: none; overflow: visible; }
+  .sidebar__bottom, .layout.is-collapsed .sidebar__bottom {
+    margin-top: 19px; padding-top: 16px;
+  }
+  .layout.is-collapsed .sidebar__bottom-eyebrow { display: block; }
+  .layout.is-collapsed .sidebar__bottom .nav-link {
+    width: 100%; height: auto; min-height: 46px; padding: 11px 14px;
+    justify-content: flex-start; margin: 0;
+  }
+  .layout.is-collapsed .sidebar__bottom .nav-link__text,
+  .layout.is-collapsed .sidebar__bottom .nav-link__arrow { display: inline; }
+}

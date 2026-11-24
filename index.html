@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101528">
+  <meta name="description" content="김재웅의 게임 기획 포트폴리오. 전투·시스템 기획 실무 경험과 개인 프로젝트를 소개합니다.">
+  <meta property="og:title" content="PORTFOLIO | 김재웅 게임 기획자">
+  <meta property="og:description" content="선택이 전략이 되도록. 게임 시스템과 전투의 선택·결과·다음 판단을 설계합니다.">
+  <title>PORTFOLIO | 김재웅 · 게임 기획자</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="data.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <div class="layout" id="layout">
+    <aside class="sidebar" aria-label="기획자 소개">
+      <div class="sidebar__inner">
+        <div class="sidebar__top">
+          <div class="brand" aria-label="PORTFOLIO">
+            <span class="brand__spark" aria-hidden="true">✦</span>
+            <span class="brand__label">PORTFOLIO</span>
+            <span class="brand__small">GAME DESIGN</span>
+          </div>
+          <button class="sidebar__toggle" type="button" id="sidebarToggle" aria-label="사이드바 접기" aria-expanded="true" title="사이드바 접기">
+            <svg class="toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14 6-6 6 6 6"/><path d="m20 6-6 6 6 6"/></svg>
+          </button>
+        </div>
+
+        <div class="sidebar__content">
+          <div class="identity">
+            <h1 class="identity__name" id="profileName">김재웅</h1>
+            <p class="identity__role" id="profileRole">게임 기획자</p>
+            <p class="identity__slogan" id="profileSlogan">선택이 전략이 되도록.</p>
+            <p class="identity__description" id="profileIntro">유저의 선택이 의미 있는 결과와 다음 판단으로 이어지도록 전투와 시스템을 설계합니다.</p>
+          </div>
+          <div class="career" id="careerBlock">
+            <span class="eyebrow">CAREER</span>
+            <p class="career__company" id="careerCompany">(주)페이즈포 · 게임 기획</p>
+            <p class="career__period" id="careerPeriod">2025.08 – 2025.12</p>
+          </div>
+          <nav class="sidebar__links" aria-label="주요 자료">
+            <a id="recordLink" class="nav-link" aria-label="게임 기록지 보기 (새 탭)" title="게임 기록지 — 새 탭에서 열기" href="https://bbudle.github.io/game_collection.html" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14"/><path d="M3 18V5a2 2 0 0 1 2-2h4a3 3 0 0 1 3 3 3 3 0 0 1 3-3h4a2 2 0 0 1 2 2v13a2 2 0 0 0-2-2h-4a3 3 0 0 0-3 3 3 3 0 0 0-3-3H5a2 2 0 0 0-2 2Z"/></svg>
+              <span class="nav-link__text">게임 기록지 보기</span>
+              <span class="nav-link__arrow" aria-hidden="true">↗</span>
+            </a>
+            <a id="careerLink" class="nav-link" href="docs/경력기술서.pdf" target="_blank" rel="noopener noreferrer" aria-label="경력기술서 PDF 보기 (새 탭)" title="경력기술서 PDF — 새 탭에서 열기">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M8 13h8M8 17h6"/></svg>
+              <span class="nav-link__text">경력기술서 PDF</span>
+              <span class="nav-link__arrow" aria-hidden="true">↗</span>
+            </a>
+          </nav>
+        </div>
+        <div class="sidebar__collapsed-mark" aria-hidden="true"></div>
+      </div>
+    </aside>
+
+    <main class="main" id="mainContent">
+      <div class="main__interior">
+        <div class="intro-mobile" aria-label="기획자 소개 요약">
+          <p class="intro-mobile__eyebrow">PORTFOLIO / GAME DESIGN</p>
+          <strong id="mobileName">김재웅</strong>
+          <span id="mobileIntro">선택이 전략이 되도록.</span>
+          <div class="intro-mobile__links"><a href="https://bbudle.github.io/game_collection.html" target="_blank" rel="noopener noreferrer">게임 기록지 ↗</a><a id="mobileCareer" href="docs/경력기술서.pdf" target="_blank" rel="noopener noreferrer">경력기술서 PDF ↗</a></div>
+        </div>
+        <div class="columns" id="projectColumns">
+          <section class="work-column" aria-labelledby="workHeading">
+            <div class="section-heading">
+              <span class="section-heading__eyebrow">WORK</span>
+              <h2 id="workHeading">실무 포트폴리오</h2>
+              <div class="section-heading__rule"></div>
+              <img class="section-heading__character section-heading__character--work" src="assets/chibi-work.png" alt="" aria-hidden="true">
+            </div>
+            <div id="workCards" class="cards"></div>
+          </section>
+          <section class="personal-column" aria-labelledby="personalHeading">
+            <div class="section-heading">
+              <span class="section-heading__eyebrow">PERSONAL PROJECTS</span>
+              <h2 id="personalHeading">개인 프로젝트</h2>
+              <div class="section-heading__rule"></div>
+              <img class="section-heading__character section-heading__character--personal" src="assets/chibi-personal.png" alt="" aria-hidden="true">
+            </div>
+            <div id="personalCards" class="cards"></div>
+          </section>
+        </div>
+        <footer class="footer">© <span id="year">2026</span> GAME DESIGN PORTFOLIO <span class="footer__dot">·</span> 김재웅</footer>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

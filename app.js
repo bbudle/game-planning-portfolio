@@ -43,9 +43,10 @@
     const isPersonal = project.category === 'personal';
     const hasImage = !!safeUrl(project.image);
     const rows = (Array.isArray(project.pdfs) ? project.pdfs : []).map((pdf) => resourceRow('pdf', pdf.label, pdf.href, project.id)).join('');
-    const video = project.video ? resourceRow('video', project.video.label, project.video.href, project.id) : '';
-    const art = hasImage ? `style="--cover:url('${escapeHtml(project.image)}')"` : '';
-    return `<article class="project-card ${hasImage?'project-card--illustrated':'project-card--empty'} " id="${escapeHtml(project.id)}">
+    const video = isPersonal && project.video ? resourceRow('video', project.video.label, project.video.href, project.id) : '';
+    const hoverImage = hasImage ? safeUrl(project.hoverImage) : null;
+    const art = hasImage ? `style="--cover:url('${escapeHtml(project.image)}');${hoverImage ? `--cover-hover:url('${escapeHtml(hoverImage)}');` : ''}"` : '';
+    return `<article class="project-card ${hasImage?'project-card--illustrated':'project-card--empty'} ${hoverImage?'project-card--hover-image':''}" id="${escapeHtml(project.id)}">
       <div class="project-card__cover" ${art}>
         <div class="project-card__info">
           <h3>${escapeHtml(project.title)}</h3>

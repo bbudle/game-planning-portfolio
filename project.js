@@ -31,7 +31,8 @@
   $('#detailCategory').textContent = project.category === 'work' ? '실무 프로젝트' : project.category === 'prototype' ? '개인 프로젝트 · 기획 검증 프로토타입' : '개인 프로젝트';
   title.textContent = project.title;
   $('#detailDescription').textContent = [project.genre, project.description].filter(Boolean).join(' · ');
-  const video = safeLocal(project.video?.href, 'video');
+  const video = project.category === 'personal' ? safeLocal(project.video?.href, 'video') : null;
+  if (project.category === 'work') $('.detail__media').hidden = true;
   if (video) {
     const el = document.createElement('video');
     el.className = 'detail__video';

@@ -863,3 +863,27 @@ body { font-family: var(--font-ui); font-weight: 400; line-height: 1.62; }
 .resource-row { min-height: 48px; }
 @media(max-width:760px) { .project-card__cover { min-height: 203px; padding: 20px 18px 14px; } }
 @media(max-width:420px) { .project-card__cover { min-height: 189px; } }
+
+/* v27 — optional project-specific cover crossfade; never changes navigation. */
+.project-card--hover-image .project-card__cover { isolation: isolate; }
+.project-card--hover-image .project-card__cover::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(90deg, rgba(7, 11, 24, .96) 0%, rgba(8, 12, 27, .95) 25%, rgba(10, 14, 28, .9) 42%, rgba(11, 15, 31, .68) 60%, rgba(12, 17, 33, .28) 78%, rgba(12, 17, 33, .08) 100%),
+    var(--cover-hover);
+  background-size: cover, cover;
+  background-position: center, center;
+  opacity: 0;
+  transition: opacity .45s ease-in-out;
+}
+.project-card--hover-image .project-card__cover > * { position: relative; z-index: 1; }
+@media (hover: hover) and (pointer: fine) {
+  .project-card--hover-image:hover .project-card__cover::before { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .project-card--hover-image .project-card__cover::before { transition: none; }
+}

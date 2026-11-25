@@ -3,6 +3,7 @@
   - 내 전용 editor.html에서 손쉽게 수정하거나, 이 파일을 직접 수정할 수 있습니다.
   - 변경 사항을 GitHub에 업로드하면 공개 페이지에 반영됩니다.
   - image: 이미지 파일의 상대 경로. 이미지가 없다면 null 유지하세요.
+  - hoverImage: 선택 사항. 마우스를 올렸을 때만 전환할 이미지의 상대 경로.
   - stage: 개인 프로젝트에만 사용. 0=기획, 1=프로토타이핑, 2=테스트 빌드, 3=출시.
   - stageProgress: 현재 단계 내 진행 비율(0~1). 생략하면 현재 단계가 전부 채워집니다.
   - stage가 아직 검증되지 않았다면 null로 두면 "진행 단계 확인 중"으로 표시됩니다.
@@ -27,8 +28,7 @@ window.PORTFOLIO_DATA = {
       description: '상품을 판매하고 수익으로 휴게소를 확장하는 타이쿤.',
       role: '라이브 서비스 개선 기획 · 데이터 수정 · QA',
       image: 'assets/jjaekjjaek-gameplay.png',
-      pdfs: [{label: '라이브 서비스', href: 'docs/jjaekjjaek-live.pdf'}],
-      video: {label: '플레이 영상', href: null}
+      pdfs: [{label: '라이브 서비스', href: 'docs/jjaekjjaek-live.pdf'}]
     },
     {
       id: 'arcana', category: 'work', order: 2,
@@ -39,12 +39,11 @@ window.PORTFOLIO_DATA = {
       pdfs: [
         {label: '전투 기획', href: 'docs/arcana-combat.pdf'},
         {label: '시스템 기획', href: 'docs/arcana-system.pdf'}
-      ],
-      video: {label: '플레이 영상', href: null}
+      ]
     },
     {
       id: 'fantasy-chess', category: 'personal', order: 3,
-      title: '판타지 체스', genre: '전략 오토배틀러 · Unreal Engine 5',
+      title: '판타지 체스', genre: '전략 오토배틀러 · Unreal Engine',
       description: '메카벨룸의 깊은 전술에 TFT의 운·직관적 성장을 결합한 전략 오토배틀러.',
       image: null,
       stage: 1, stageProgress: 2/3, // 프로토타이핑 진행 중 (표시용)
@@ -55,7 +54,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: 'smash-legacy', category: 'personal', order: 4,
-      title: 'Smash & Legacy', genre: '3D 액션 로그라이트 · Unity 6',
+      title: 'Smash & Legacy', genre: '3D 액션 로그라이트 · Unity',
       description: '전투와 성장의 반복을 통해 선택을 쌓아가는 게임.',
       image: null,
       stage: 1, stageProgress: 2/3, // 프로토타이핑 진행 중 (표시용)
@@ -69,6 +68,7 @@ window.PORTFOLIO_DATA = {
       title: '눈동자 그녀 우주', genre: '천체 관측 · 힐링 / 코즈믹 호러',
       description: '낮의 일상과 밤의 관측이 교차하는 서사형 게임.',
       image: 'assets/observatory-card.webp', // 사용자 제공 원본 이미지 사용
+      hoverImage: 'assets/observatory-card-hover.webp',
       stage: 0, // 기획
       pdfs: [{label: '시스템·콘텐츠 기획', href: null}],
       video: {label: '플레이 영상', href: null}

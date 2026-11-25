@@ -31,11 +31,12 @@
     return `<div class="resource-row resource-row--pending" title="자료 준비 중" aria-label="${escapeHtml(text)} · 준비 중">${content}<span class="resource-row__pending">준비 중</span></div>`;
   }
 
-  function progress(stage) {
+  function progress(stage, stageProgress = 1) {
     if (stage === null || !Number.isInteger(stage) || stage < 0 || stage > 3) {
       return '<div class="progress progress--unknown"><span>진행 단계 확인 중</span></div>';
     }
-    return `<div class="progress" aria-label="개발 단계: ${stages[stage]}"><div class="progress__stages">${stages.map((s, i) => `<span class="progress__stage ${i===stage?'is-current':''}">${s}</span>`).join('')}</div><div class="progress__track">${stages.map((s,i) => `<span class="progress__segment ${i<=stage?'is-passed':''} ${i===stage?'is-current':''}" style="--stage-index:${i}" title="${s}"></span>`).join('')}</div></div>`;
+    const fraction = Number.isFinite(stageProgress) ? Math.max(0, Math.min(1, stageProgress)) : 1;
+    return `<div class="progress" aria-label="개발 단계: ${stages[stage]}${fraction < 1 ? ` 진행 중 (약 ${Math.round(fraction * 100)}%)` : ''}"><div class="progress__stages">${stages.map((s, i) => `<span class="progress__stage ${i===stage?'is-current':''}">${s}</span>`).join('')}</div><div class="progress__track">${stages.map((s,i) => `<span class="progress__segment ${i<=stage?'is-passed':''} ${i===stage?'is-current':''} ${i===stage&&fraction<1?'is-partial':''}" style="--stage-index:${i};--stage-fill:${i<stage?100:i===stage?fraction*100:0}%" title="${s}"></span>`).join('')}</div></div>`;
   }
 
   function projectCard(project) {
@@ -50,8 +51,9 @@
           <h3>${escapeHtml(project.title)}</h3>
           <p class="project-card__genre">${escapeHtml(project.genre)}</p>
           <p class="project-card__description">${escapeHtml(project.description)}</p>
+          ${project.role ? `<p class="project-card__role"><span>담당</span> ${escapeHtml(project.role)}</p>` : ''}
         </div>
-        ${isPersonal && project.showProgress !== false ? progress(project.stage) : ''}
+        ${isPersonal && project.showProgress !== false ? progress(project.stage, project.stageProgress) : ''}
       </div>
       <div class="project-card__resources" aria-label="${escapeHtml(project.title)} 자료">${rows}${video}</div>
     </article>`;
